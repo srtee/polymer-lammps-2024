@@ -1,0 +1,33 @@
+# run ID settings
+variable nAO index 110  # AcetOne
+variable nAN index 155  # AcetoNitrile
+variable runno index 1  # run number
+
+variable runID string vmix_${nAO}AO-${nAN}AN_run${runno}
+shell mkdir ../${runID}
+shell cd ../${runID}
+log log.buildAO.${runID}
+
+# global parameters
+
+include ../../setup/settings.lmp
+
+# make box and read in FF
+
+variable halflen equal 25*((v_nAO+v_nAN)/265)^(1/3) # make box bigger if more molecules
+region box block -${halflen} ${halflen} -${halflen} ${halflen} -${halflen} ${halflen}
+create_box 6 box bond/types 5 angle/types 6 & 
+    dihedral/types 1 improper/types 1 &
+    extra/bond/per/atom 4 extra/angle/per/atom 9 & 
+    extra/dihedral/per/atom 6 extra/improper/per/atom 1 &
+    extra/special/per/atom 9
+include ../../setup/oplsaa.ff
+
+# read in molecule and create
+
+molecule acetone ../../setup/acetone.mol
+create_atoms 0 random ${nAO} $(23593+v_runno) NULL mol acetone $(57092+v_runno) overlap 2.0
+
+# write_data
+
+write_data init_onlyAO_${runID}.data

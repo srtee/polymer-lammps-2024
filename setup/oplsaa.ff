@@ -1,0 +1,29 @@
+mass 1*2 12.01 # C
+mass 3 15.999  # acetone O
+mass 4 1.008   # [C-]H
+mass 5 12.01   # acetonitrile [C-]C[#N]
+mass 6 14.007
+
+pair_coeff 1 1 0.066  3.50  # [H3]C
+pair_coeff 2 2 0.105  3.75  # [O=]C
+pair_coeff 3 3 0.210  2.96  # O
+pair_coeff 4 4 0.030  2.50  # H
+pair_coeff 5 5 0.066  3.30  # [C-]C[#N]
+pair_coeff 6 6 0.170  3.20  # N
+
+bond_coeff 1 317.0 1.5220 # [H3]C-C[=O]
+bond_coeff 2 570.0 1.2290 # C=O
+bond_coeff 3 340.0 1.0900 # C-H
+bond_coeff 4 390.0 1.4700 # C-[C#N]
+bond_coeff 5 650.0 1.1570 # [C-]C#N
+
+angle_coeff 1 80.0 120.40 # [H3]C-C=O
+angle_coeff 2 70.0 116.00 # [H3]C-C[=O]-C
+angle_coeff 3 35.0 109.50 # [O=]C-C-H
+angle_coeff 4 33.0 107.80 # H-C-H (acetone)
+angle_coeff 5 150.0 180.00 # C-C#N
+angle_coeff 6 35.0 108.50 # H-C-H (acetonitrile)
+
+dihedral_coeff 1 0.0 0.0 0.275 0.0 # H-C-C-C
+
+improper_coeff 1 10.50 180 # C1-(C=O)-C2

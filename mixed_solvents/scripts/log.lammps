@@ -1,0 +1,18 @@
+LAMMPS (21 Nov 2023 - Development - patch_21Nov2023-499-gd30483fa67-modified)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+# run ID settings
+variable nAO index 110  # AcetOne
+variable nAN index 155  # AcetoNitrile
+variable runno index 1  # run number
+
+variable runID string vmix_${nAO}AO-${nAN}AN_run${runno}
+variable runID string vmix_110AO-${nAN}AN_run${runno}
+variable runID string vmix_110AO-155AN_run${runno}
+variable runID string vmix_110AO-155AN_run1
+shell mkdir ../${runID}
+shell mkdir ../vmix_110AO-155AN_run1
+shell cd ../${runID}
+shell cd ../vmix_110AO-155AN_run1
+log log.equil.${runID}
+log log.equil.vmix_110AO-155AN_run1

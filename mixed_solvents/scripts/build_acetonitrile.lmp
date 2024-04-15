@@ -1,0 +1,26 @@
+# run ID settings
+variable nAO index 110  # AcetOne
+variable nAN index 155  # AcetoNitrile
+variable runno index 1  # run number
+
+variable runID string vmix_${nAO}AO-${nAN}AN_run${runno}
+shell mkdir ../${runID}
+shell cd ../${runID}
+log log.buildAN.${runID}
+
+# global parameters
+
+include ../../setup/settings.lmp
+
+# read in earlier acetone box
+
+read_data init_onlyAO_${runID}.data
+
+# read in molecule and create
+
+molecule acetonitrile ../../setup/acetonitrile.mol
+create_atoms 0 random ${nAN} $(23593+v_runno) NULL mol acetonitrile $(57092+v_runno) overlap 2.0
+
+# write_data
+
+write_data init_${runID}.data
