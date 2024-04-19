@@ -1,0 +1,20 @@
+#!/bin/bash -l
+#PBS -N vmix2
+#PBS -l walltime=12:00:00
+#PBS -l select=2:ncpus=12:mpiprocs=12:ompthreads=1
+# note mpiprocs is PER NODE so always 12
+# but total procs is 24 which we set later on in -n
+
+source $HOME/.bashrc
+module load gcc/13.1.0
+module load mpi/openmpi/4.0.2
+module load library/fftw/3.3.8openmpi402
+
+export OMP_NUM_THREADS=1
+cd $PBS_O_WORKDIR
+export RUN=2
+# change runno (inside LAMMPS script) to 2 (inside this script)
+# note jobs will automatically write output to different folder
+mpirun -n 24 lmp_mpi -i build_acetone.lmp -var runno ${RUN}
+mpirun -n 24 lmp_mpi -i build_acetonitrile.lmp -var runno ${RUN}
+mpirun -n 24 lmp_mpi -i equil.lmp -var runno ${RUN}
