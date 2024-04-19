@@ -24,7 +24,7 @@ reset_timestep 0
 
 # equilibrate NPT
 
-#dump DCD all dcd 5000 equil_${runID}.dcd
+dump DCD all dcd 5000 equil_${runID}.dcd
 
 fix LOG all print 1000 "$(step) $(temp) $(epair) $(emol) $(etotal) $(press) $(vol) $(density) $(econserve)" screen no file thermo_${runID}.txt
 
@@ -34,7 +34,7 @@ thermo 1000
 fix CH  all shake 0.0001 20 0 t 4
 fix NPT1 all npt   temp 20 300 $(100*dt) iso 1.0 1.0 $(200*dt)
 
-run 200000
+run 400000
 
 unfix NPT1
 
