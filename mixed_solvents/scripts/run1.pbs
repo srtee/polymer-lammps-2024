@@ -10,6 +10,6 @@ module load library/fftw/3.3.8openmpi402
 
 export OMP_NUM_THREADS=1
 cd $PBS_O_WORKDIR
-mpirun -n 12 lmp_mpi -i build_acetone.lmp
-mpirun -n 12 lmp_mpi -i build_acetonitrile.lmp
-mpirun -n 12 lmp_mpi -i equil.lmp
+mpirun lmp_mpi -i build_acetone.lmp
+mpirun lmp_mpi -i build_acetonitrile.lmp
+mpirun lmp_mpi -i equil.lmp
